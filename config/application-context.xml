@@ -23,7 +23,7 @@
     <property name="dataSource" ref="dataSource" />
     <property name="annotatedClasses">
       <list>
-        <value>converter.domain.VerizonDLDiscPhoneData</value>
+        <value>converter.domain.PhoneData</value>
       </list>
     </property>
     <property name="hibernateProperties">

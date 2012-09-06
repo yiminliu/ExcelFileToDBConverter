@@ -1,6 +1,7 @@
 package converter.dao;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import converter.domain.VerizonDLDiscPhoneData;
+import converter.domain.PhoneData;
 
 
 @Repository("phoneDao")
@@ -20,23 +21,23 @@ public class PhoneDao extends HibernateDaoSupport{
 	   setHibernateTemplate(hibernateTemplate);
 	}
 	
-	public int save(VerizonDLDiscPhoneData phone){
+	public int save(PhoneData phone){
 	   int id = (Integer) getHibernateTemplate().save(phone);	   
 	   return id;
 	}   
 	
-	public void save(final Set<Set<VerizonDLDiscPhoneData>> records){
-      Set<VerizonDLDiscPhoneData> phoneSet = null;	
-      VerizonDLDiscPhoneData phone = null;
+	public void save(final Set<Set<PhoneData>> records){
+      Set<PhoneData> phoneSet = null;	
+      PhoneData phone = null;
 	  HibernateTemplate ht = getHibernateTemplate();
 	  ht.setFlushMode(ht.FLUSH_COMMIT);
       // for(int i = 0; i < records.size(); i++) {
 	      Iterator it = records.iterator();
 	      while(it.hasNext()){
-	    	  phoneSet = (Set<VerizonDLDiscPhoneData>)it.next();
+	    	  phoneSet = (Set<PhoneData>)it.next();
 	    	  Iterator it2 = phoneSet.iterator();
 	     	  while(it2.hasNext()){
-	       	      phone = (VerizonDLDiscPhoneData) it2.next();
+	       	      phone = (PhoneData) it2.next();
                   ht.saveOrUpdate(phone);
 	       	  } 
 		  }
@@ -47,4 +48,9 @@ public class PhoneDao extends HibernateDaoSupport{
 	      //}
       } 		
 	//}	
+	
+	public List<PhoneData>findAll(){
+		return (List<PhoneData>)getHibernateTemplate().find("from PhoneData");
+		
+	}
 }

@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import reader.ExcellFileReader;
 
-import converter.domain.VerizonDLDiscPhoneData;
+import converter.domain.PhoneData;
 import converter.service.PhoneService;
 
 public class ExcelFileReaderTest {
@@ -59,7 +59,7 @@ public class ExcelFileReaderTest {
 	public void testReadDataFromWorksheet() {		
 		 POIFSFileSystem poiFile = reader.getPOIFSFileSystem(fileName);
 		 HSSFSheet workSheet = reader.getHSSFSheet(poiFile);
-		 Set<Set<VerizonDLDiscPhoneData>> dataHolder = reader.readDataFromWorksheet(workSheet);           
+		 Set<Set<PhoneData>> dataHolder = reader.readDataFromWorksheet(workSheet);           
 		 reader.printDataToConsole(dataHolder);
 		 assertNotNull(dataHolder);        
 	}

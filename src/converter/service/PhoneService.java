@@ -1,5 +1,6 @@
 package converter.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import converter.dao.PhoneDao;
-import converter.domain.VerizonDLDiscPhoneData;
+import converter.domain.PhoneData;
 
 
 @Service("phoneService")
@@ -19,25 +20,29 @@ public class PhoneService {
 	@Qualifier("phoneDao")
 	private PhoneDao phoneDao;
 	
-	public int save(VerizonDLDiscPhoneData phone) {
+	public int save(PhoneData phone) {
 		return phoneDao.save(phone);
 	}
 	
-	public void saveAllRecords(Set<Set<VerizonDLDiscPhoneData>> records){
+	public void saveAllRecords(Set<Set<PhoneData>> records){
 		phoneDao.save(records);
+	}
+	
+	public List<PhoneData> getAllRecords(){
+		return phoneDao.findAll();
 	}
 	/*
 	public void saveAllRecords(Set<Set> records){
-		//VerizonDLDiscPhoneData phone = null;
+		//PhoneData phone = null;
 		for(Set cellStoreSet : records){
        		String stringCellValue = null;
             //for(int j = 0; j < cellStoreSet.size(); j++) {
        		Iterator it = records.iterator();
        		while(it.hasNext()){
-       			Set<VerizonDLDiscPhoneData> set = (Set<VerizonDLDiscPhoneData>)it.next();
+       			Set<PhoneData> set = (Set<PhoneData>)it.next();
        			Iterator it2 = set.iterator();
        			while(it2.hasNext()){
-        	          VerizonDLDiscPhoneData phone = (VerizonDLDiscPhoneData) it2.next();
+        	          PhoneData phone = (PhoneData) it2.next();
         	          save(phone);
        			}
        		}		

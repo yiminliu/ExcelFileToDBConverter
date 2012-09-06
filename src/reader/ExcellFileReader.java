@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import converter.domain.VerizonDLDiscPhoneData;
+import converter.domain.PhoneData;
 import converter.service.PhoneService;
 
 	
@@ -52,16 +52,16 @@ public class ExcellFileReader {
     	return mySheet;
     }
 
-    public static Set<Set<VerizonDLDiscPhoneData>> readDataFromWorksheet(HSSFSheet mySheet) {
-           Set<Set<VerizonDLDiscPhoneData>> cellHolder = new HashSet<Set<VerizonDLDiscPhoneData>>();
-           VerizonDLDiscPhoneData phone = null;
+    public static Set<Set<PhoneData>> readDataFromWorksheet(HSSFSheet mySheet) {
+           Set<Set<PhoneData>> cellHolder = new HashSet<Set<PhoneData>>();
+           PhoneData phone = null;
            try {
                Iterator rowIter = mySheet.rowIterator();
                while (rowIter.hasNext()) {
-            	      phone = new VerizonDLDiscPhoneData();
+            	      phone = new PhoneData();
                       HSSFRow myRow = (HSSFRow) rowIter.next();
                       Iterator cellIter = myRow.cellIterator();
-                      Set<VerizonDLDiscPhoneData> cellStoreSet = new HashSet<VerizonDLDiscPhoneData>();
+                      Set<PhoneData> cellStoreSet = new HashSet<PhoneData>();
                       while (cellIter.hasNext()) {                    	     
                              HSSFCell myCell = (HSSFCell) cellIter.next();
                              myCell.setCellType(Cell.CELL_TYPE_STRING);
@@ -80,12 +80,12 @@ public class ExcellFileReader {
          return cellHolder;
    }
 
-    protected static void printDataToConsole(Set<Set<VerizonDLDiscPhoneData>> dataHolder) {
+    protected static void printDataToConsole(Set<Set<PhoneData>> dataHolder) {
        	for(Set cellStoreSet : dataHolder){
        		String stringCellValue = null;
             //for(int j = 0; j < cellStoreList.size(); j++) {
            	for(Iterator it = cellStoreSet.iterator(); it.hasNext();){
-           		VerizonDLDiscPhoneData phone = (VerizonDLDiscPhoneData) it.next();
+           		PhoneData phone = (PhoneData) it.next();
                 stringCellValue = phone.toString();                   
             }   
             System.out.println(stringCellValue + "\t");
@@ -99,7 +99,7 @@ public class ExcellFileReader {
         
         POIFSFileSystem poiFile = reader.getPOIFSFileSystem(fileName);
         HSSFSheet hssfSheet = reader.getHSSFSheet(poiFile);         
-        Set<Set<VerizonDLDiscPhoneData>> dataHolder = reader.readDataFromWorksheet(hssfSheet);
+        Set<Set<PhoneData>> dataHolder = reader.readDataFromWorksheet(hssfSheet);
                  
    	 reader.initForTest();
         try{

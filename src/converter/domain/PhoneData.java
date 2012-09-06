@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="VRZ_DL_DISC_PHONE")
-public class VerizonDLDiscPhoneData {
+public class PhoneData {
 	
 	@Id
 	@Column(name="id", updatable=false)
@@ -91,7 +91,7 @@ public class VerizonDLDiscPhoneData {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		VerizonDLDiscPhoneData other = (VerizonDLDiscPhoneData) obj;
+		PhoneData other = (PhoneData) obj;
 		if (atn == null) {
 			if (other.atn != null)
 				return false;
@@ -102,7 +102,7 @@ public class VerizonDLDiscPhoneData {
 
 	@Override
 	public String toString() {
-		return "VerizonDLDiscPhoneData [userName='" + userName + "', atn=" + atn
+		return "PhoneData [userName='" + userName + "', atn=" + atn
 				+ "]";
 	}
 	
